@@ -1,34 +1,42 @@
 package com.meag.medicationalarm;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-
-import com.meag.medicationalarm.Room.Reminder;
-import com.meag.medicationalarm.Room.ViewModelsApp;
-
-import java.util.List;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
-
-    ViewModelsApp viewModelsApp;
+    //    ViewModelsApp viewModelsApp;
+    private ImageView add_alarm;
+    private RecyclerView alarm_container;
+    private LinearLayout add_container;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        add_alarm = findViewById(R.id.add);
+        add_container = findViewById(R.id.add_button_container);
+        alarm_container = findViewById(R.id.recycler_view);
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.transition);
 
-        viewModelsApp = ViewModelProviders.of(this).get(ViewModelsApp.class);
+        add_alarm.startAnimation(anim);
+        add_container.startAnimation(anim);
+        alarm_container.startAnimation(anim);
 
-        LiveData<List<Reminder>> remindersList = viewModelsApp.getRemindersList();
-        remindersList.observe(this, new Observer<List<Reminder>>() {
-            @Override
-            public void onChanged(@Nullable List<Reminder> reminderList) {
+
+//        viewModelsApp = ViewModelProviders.of(this).get(ViewModelsApp.class);
+//
+//        LiveData<List<Reminder>> remindersList = viewModelsApp.getRemindersList();
+//        remindersList.observe(this, new Observer<List<Reminder>>() {
+//            @Override
+//            public void onChanged(@Nullable List<Reminder> reminderList) {
 //                adapter.setList(doseList);
 //                adapter.notifyDataSetChanged();
-            }
-        });
+//            }
+//        });
     }
 }
